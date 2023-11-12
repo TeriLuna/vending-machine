@@ -1,15 +1,23 @@
 import React from "react";
-import ProductItem from "./ProductItem";
 
+import { Box } from "@mui/material";
+
+import ProductItem from "./ProductItem";
 import productsData from "../Data/productsData.json";
 
-function ProductsCollection() {
-  console.log({ productsData }, "heeey");
+const ProductsCollection = () => {
   return (
-    <div>
-      <ProductItem />
-    </div>
+    <Box sx={{ display: "inline-flex", flexDirection: "row" }}>
+      {productsData.map((item) => (
+        <ProductItem
+          key={item.id}
+          name={item.name}
+          price={item.price}
+          qty={item.qty}
+        />
+      ))}
+    </Box>
   );
-}
+};
 
 export default ProductsCollection;
