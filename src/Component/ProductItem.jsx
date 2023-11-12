@@ -1,13 +1,15 @@
-import React from 'react'
+import React from "react";
+
+import { Box, Container } from "@mui/material";
 
 function ProductItem() {
-  const ItemContainer =styled.div`
-  `
   return (
     <div>
-
+      <Container>
+        <Box>scddsc</Box>
+      </Container>
     </div>
-  )
+  );
 }
 
-export default ProductItem
+export default ProductItem;
