@@ -1,3 +1,7 @@
+import { CssBaseline } from "@mui/material";
+
+import Footer from "./Component/Footer";
+import Header from "./Component/Header";
 import VendorMachine from "./Component/VendorMachine";
 
 import { IncomeProvider } from "./Context/IncomeProvider";
@@ -5,8 +9,10 @@ import { IncomeProvider } from "./Context/IncomeProvider";
 function App() {
   return (
     <IncomeProvider>
-      <h1>Vending Machine</h1>
+      <CssBaseline />
+      <Header />
       <VendorMachine />
+      <Footer />
     </IncomeProvider>
   );
 }
