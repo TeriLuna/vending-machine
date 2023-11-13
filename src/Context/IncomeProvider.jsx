@@ -3,12 +3,16 @@ import React, { createContext, useState } from "react";
 export const IncomeContext = createContext();
 
 export const IncomeProvider = ({ children }) => {
-  const [totalCountCoin, setTotalCountCoin] = useState(0);
+  const [totalCountCoin, setTotalCountCoin] = useState();
+  let [moneyInserted, setMoneyInserted] = useState([]);
 
   // Handle coins inserted by user
   const handleCoinCount = (value) => {
-    const newTotalCoins = totalCountCoin + value;
+    moneyInserted.push(value);
+    // const newTotalCoins = totalCountCoin + value;
+    let newTotalCoins = moneyInserted.reduce((a, b) => a + b);
     setTotalCountCoin(newTotalCoins);
+    console.log("context", { newTotalCoins, totalCountCoin });
   };
 
   // Products Selection
@@ -23,7 +27,8 @@ export const IncomeProvider = ({ children }) => {
 
   // Return Coins
   const handleReturnCoins = () => {
-    setTotalCountCoin(0);
+    setTotalCountCoin();
+    setMoneyInserted();
   };
 
   const value = {
@@ -32,6 +37,7 @@ export const IncomeProvider = ({ children }) => {
     handleCoinCount,
     onAddProduct,
     handleReturnCoins,
+    moneyInserted,
   };
   return (
     <IncomeContext.Provider value={value}>{children}</IncomeContext.Provider>
