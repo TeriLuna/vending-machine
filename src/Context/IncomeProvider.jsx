@@ -3,32 +3,35 @@ import React, { createContext, useState } from "react";
 export const IncomeContext = createContext();
 
 export const IncomeProvider = ({ children }) => {
-  const [totalCount, setTotalCount] = useState(0);
-  const [product, setProduct] = useState({});
-  const [count, setCount] = useState(1);
+  const [totalCountCoin, setTotalCountCoin] = useState(0);
 
   // Handle coins inserted by user
   const handleCoinCount = (value) => {
-    const newValue = totalCount + value;
-    setTotalCount(newValue);
+    const newTotalCoins = totalCountCoin + value;
+    setTotalCountCoin(newTotalCoins);
   };
 
   // Products Selection
   const onAddProduct = (value) => {
-    if (totalCount >= value.price && count < value.qty) {
-      setProduct(value);
-      setCount(count + 1);
-      console.log({ count, value });
-    } else {
-      console.log("Please insert more coins to buy a product");
+    let price = value.price;
+    if (totalCountCoin >= price) {
+      const newTotalCoins = totalCountCoin - price;
+
+      setTotalCountCoin(newTotalCoins);
     }
   };
 
+  // Return Coins
+  const handleReturnCoins = () => {
+    setTotalCountCoin(0);
+  };
+
   const value = {
-    totalCount,
-    setTotalCount,
+    totalCountCoin,
+    setTotalCountCoin,
     handleCoinCount,
     onAddProduct,
+    handleReturnCoins,
   };
   return (
     <IncomeContext.Provider value={value}>{children}</IncomeContext.Provider>

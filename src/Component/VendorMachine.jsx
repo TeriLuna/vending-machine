@@ -1,13 +1,20 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import { Container } from "@mui/material";
 
-import InputCoin from "./InputCoin";
-import ProductsCollection from "./ProductsCollection";
 import { IncomeContext } from "../Context/IncomeProvider";
 
+import InputCoin from "./InputCoin";
+import ProductsCollection from "./ProductsCollection";
+import productsData from "../Data/productsData.json";
+
 const VendorMachine = () => {
-  const { totalCount } = useContext(IncomeContext);
+  const { totalCountCoin } = useContext(IncomeContext);
+
+  const roundedNum = totalCountCoin.toFixed(2);
+  const itemPrice = productsData.reduce(function (prev, current) {
+    return prev.price < current.price ? prev : current;
+  });
 
   return (
     <Container
@@ -15,9 +22,12 @@ const VendorMachine = () => {
     >
       <InputCoin />
       <div>
-        <p>You insert: {totalCount}</p>
+        <p>Your insert: $ {roundedNum}</p>
+        {itemPrice.price > roundedNum && totalCountCoin > 0 ? (
+          <>Please insert more coins</>
+        ) : null}
       </div>
-      <ProductsCollection />
+      <ProductsCollection data={productsData} />
     </Container>
   );
 };
