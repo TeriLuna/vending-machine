@@ -14,8 +14,6 @@ const InputCoinContainer = ({ data }) => {
     return prev.price < current.price ? prev : current;
   });
 
-  console.log("container", { moneyInserted, totalCountCoin });
-
   return (
     <Grid item component="main" xs={12} md={6} lg={6}>
       <Typography
@@ -29,7 +27,7 @@ const InputCoinContainer = ({ data }) => {
         Insert Money
       </Typography>
       <Typography component="p" variant="subtitle1" align="center" mb={3}>
-        Your insert: $ {roundedNum}
+        Your insert: $ {roundedNum === undefined ? <>0.00</> : roundedNum}
       </Typography>
       {/* Show message for insert more coins */}
       {itemPrice.price > roundedNum && totalCountCoin > 0 ? (

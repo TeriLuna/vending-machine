@@ -4,15 +4,13 @@ export const IncomeContext = createContext();
 
 export const IncomeProvider = ({ children }) => {
   const [totalCountCoin, setTotalCountCoin] = useState();
-  let [moneyInserted, setMoneyInserted] = useState([]);
+  const [moneyInserted, setMoneyInserted] = useState([]);
 
   // Handle coins inserted by user
   const handleCoinCount = (value) => {
     moneyInserted.push(value);
-    // const newTotalCoins = totalCountCoin + value;
     let newTotalCoins = moneyInserted.reduce((a, b) => a + b);
     setTotalCountCoin(newTotalCoins);
-    console.log("context", { newTotalCoins, totalCountCoin });
   };
 
   // Products Selection
@@ -27,8 +25,8 @@ export const IncomeProvider = ({ children }) => {
 
   // Return Coins
   const handleReturnCoins = () => {
-    setTotalCountCoin();
-    setMoneyInserted();
+    setTotalCountCoin(0);
+    setMoneyInserted([]);
   };
 
   const value = {

@@ -10,22 +10,18 @@ const InputCoin = (props) => {
 
   const moneyAcceptance = [0.05, 0.1, 0.25, 1];
 
-  let b = !moneyInserted.lenght;
-
-  console.log("change", { moneyInserted, b });
   return (
     <>
       <Grid container justifyContent="center">
         {moneyAcceptance.map((money, i) => {
-          let valueCoin = money;
           return (
             <Grid item key={i} maxWidth="xs" mb={2} mr>
               <Button
-                onClick={() => handleCoinCount(valueCoin)}
+                onClick={() => handleCoinCount(money)}
                 variant="outlined"
                 size="large"
               >
-                {valueCoin}
+                {money}
               </Button>
             </Grid>
           );
@@ -36,7 +32,7 @@ const InputCoin = (props) => {
           variant="contained"
           color="secondary"
           size="large"
-          disabled={b}
+          disabled={!moneyInserted.length}
           startIcon={<PaidIcon />}
           sx={{ marginTop: "20px" }}
           onClick={() => handleReturnCoins()}
