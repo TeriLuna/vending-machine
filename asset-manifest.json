@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/TeriLuna/vending-machine.git/static/js/main.6eb5f5c2.js",
+    "static/js/787.d2646dba.chunk.js": "/TeriLuna/vending-machine.git/static/js/787.d2646dba.chunk.js",
+    "index.html": "/TeriLuna/vending-machine.git/index.html",
+    "main.6eb5f5c2.js.map": "/TeriLuna/vending-machine.git/static/js/main.6eb5f5c2.js.map",
+    "787.d2646dba.chunk.js.map": "/TeriLuna/vending-machine.git/static/js/787.d2646dba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.6eb5f5c2.js"
+  ]
+}
