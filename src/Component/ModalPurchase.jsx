@@ -24,7 +24,7 @@ const ModalPurchase = () => {
   } = useContext(IncomeContext);
   const roundedNumTotalIncome = sumCoinInserted?.toFixed(2);
 
-  let totalValueCoinsChange = coinsChange?.reduce((a, b) => a + b);
+  let exchange = coinsChange?.length;
 
   return (
     <Dialog
@@ -48,14 +48,15 @@ const ModalPurchase = () => {
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <Typography variant="h5" component="h6" my={2}>
+        <Typography variant="h5" component="h6" my={2} textAlign="center">
           Thank you so much for your purchase!
         </Typography>
         <DialogContentText
           id="alert-information-purchase"
           sx={{
             display: "flex",
-            alignItems: "center",
+            flexWrap: "wrap",
+            justifyContent: "center",
             mb: 2,
           }}
         >
@@ -63,7 +64,7 @@ const ModalPurchase = () => {
           {productBought.price} / Unit. Your income was ${" "}
           {roundedNumTotalIncome}
         </DialogContentText>
-        {coinsChange?.length > 0 ? (
+        {exchange > 0 ? (
           <DialogContentText
             id="alert-information-purchase"
             sx={{
@@ -72,8 +73,15 @@ const ModalPurchase = () => {
               alignItems: "center",
             }}
           >
-            Your change is $ {totalValueCoinsChange}
-            <Box display="flex" flexWrap="wrap" mt={1}>
+            Your change is $ {coinsChange.reduce((a, b) => a + b, 0).toFixed(2)}
+            <hr />
+            <Box
+              component="span"
+              display="flex"
+              flexWrap="wrap"
+              justifyContent="center"
+              mt={1}
+            >
               {coinsChange.map((coinValue, i) => {
                 return (
                   <Box component="span" key={i} mr={1}>
