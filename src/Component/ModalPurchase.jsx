@@ -24,7 +24,7 @@ const ModalPurchase = () => {
   } = useContext(IncomeContext);
   const roundedNumTotalIncome = sumCoinInserted?.toFixed(2);
 
-  let totalValueCoinsChange = coinsChange?.reduce((a, b) => a + b).toFixed(2);
+  let totalValueCoinsChange = coinsChange?.reduce((a, b) => a + b);
 
   return (
     <Dialog
@@ -72,14 +72,18 @@ const ModalPurchase = () => {
               alignItems: "center",
             }}
           >
-            Your change is $ {totalValueCoinsChange}, please take your change:
-            {coinsChange.map((coinValue, i) => {
-              return (
-                <Box component="span" key={i}>
-                  $ {coinValue}
-                </Box>
-              );
-            })}
+            Your change is $ {totalValueCoinsChange}
+            <Box display="flex" flexWrap="wrap" mt={1}>
+              {coinsChange.map((coinValue, i) => {
+                return (
+                  <Box component="span" key={i} mr={1}>
+                    $ {coinValue}
+                    {coinValue > 0 && ","}
+                  </Box>
+                );
+              })}{" "}
+              please take your change.
+            </Box>
           </DialogContentText>
         ) : null}
       </DialogContent>
