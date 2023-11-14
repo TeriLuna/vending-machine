@@ -3,23 +3,23 @@ import React from "react";
 import { Box, Button, Grid } from "@mui/material";
 import PaidIcon from "@mui/icons-material/Paid";
 
-import moneyList from "../Data/moneyAcceptance.json";
-
 const InputCoin = (props) => {
-  const { handleReturnCoins, handleCoinCount, totalCountCoin } = props;
+  const { moneyInserted, handleReturnCoins, handleCoinCount } = props;
+
+  const moneyAcceptance = [0.05, 0.1, 0.25, 1];
+
   return (
     <>
       <Grid container justifyContent="center">
-        {moneyList.map((money, i) => {
-          let valueCoin = money.value;
+        {moneyAcceptance.map((money, i) => {
           return (
             <Grid item key={i} maxWidth="xs" mb={2} mr>
               <Button
-                onClick={() => handleCoinCount(valueCoin)}
+                onClick={() => handleCoinCount(money)}
                 variant="outlined"
                 size="large"
               >
-                {valueCoin}
+                {money}
               </Button>
             </Grid>
           );
@@ -30,7 +30,7 @@ const InputCoin = (props) => {
           variant="contained"
           color="secondary"
           size="large"
-          disabled={!totalCountCoin}
+          disabled={!moneyInserted.length}
           startIcon={<PaidIcon />}
           sx={{ marginTop: "20px" }}
           onClick={() => handleReturnCoins()}
