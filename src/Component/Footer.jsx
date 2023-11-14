@@ -22,6 +22,8 @@ const Footer = () => {
         {"Copyright © "}
         <Link
           color="inherit"
+          target="_blank"
+          rel="noreferrer"
           href="https://github.com/TeriLuna/vending-machine"
         >
           Catherine Lozada Bedoya

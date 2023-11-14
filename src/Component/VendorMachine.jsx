@@ -6,14 +6,14 @@ import InputCoinContainer from "./InputCoinContainer";
 import ProductsCollection from "./ProductsCollection";
 
 import productsData from "../Data/productsData.json";
-import PopupPurchase from "./PopupPurchase";
+import ModalPurchase from "./ModalPurchase";
 
 const VendorMachine = () => {
   return (
     <Grid container spacing={4}>
       <InputCoinContainer data={productsData} />
       <ProductsCollection data={productsData} />
-      <PopupPurchase />
+      <ModalPurchase />
     </Grid>
   );
 };

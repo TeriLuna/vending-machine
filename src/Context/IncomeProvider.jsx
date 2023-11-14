@@ -5,8 +5,8 @@ export const IncomeContext = createContext();
 export const IncomeProvider = ({ children }) => {
   const [sumCoinInserted, setSumCoinInserted] = useState(0);
   const [moneyInserted, setMoneyInserted] = useState([]);
-  const [coinsChange, setCoinsChange] = useState([]);
-  const [openPopup, setOpenPopup] = useState(false);
+  const [coinsChange, setCoinsChange] = useState([0]);
+  const [openModal, setOpenModal] = useState(false);
   const [productBought, setProductBought] = useState({});
 
   const moneyAcceptance = [1, 0.25, 0.1, 0.05];
@@ -23,26 +23,44 @@ export const IncomeProvider = ({ children }) => {
     let change = sumCoinInserted - value.price;
     getChange(change);
     setProductBought(value);
-    setOpenPopup(true);
+    setOpenModal(true);
   };
 
-  // Get Change
+  // Get Coins Change for the user
   const getChange = (change) => {
-    let res = [0];
-    moneyAcceptance.forEach((coin) => {
-      if (coin > change) {
-        return;
-      } else if (coin <= change) {
-        let changeRes = res.reduce((a, b) => a + b);
-        console.log({ changeRes });
-        if (changeRes + coin <= change) {
-          res.push(coin);
-          return;
+    const changeCoins = [];
+
+    let remainingChange = change;
+
+    for (const coin of moneyAcceptance) {
+      while (remainingChange >= coin) {
+        changeCoins.push(coin);
+        remainingChange = parseFloat((remainingChange - coin).toFixed(2));
+      }
+
+      if (remainingChange !== 0) {
+        // If we couldn't find exact change, reset and try with all available coins
+        remainingChange = change;
+        changeCoins.length = 0;
+
+        for (const coin of moneyAcceptance) {
+          while (remainingChange >= coin) {
+            changeCoins.push(coin);
+            remainingChange = parseFloat((remainingChange - coin).toFixed(2));
+          }
         }
       }
-    });
-    res.shift();
-    setCoinsChange(res);
+
+      if (remainingChange !== 0) {
+        // If we still couldn't find exact change, return an empty array
+        return { totalChange: change, coins: [] };
+      }
+
+      setCoinsChange(changeCoins);
+      return;
+    }
+
+    changeCoins.shift();
   };
 
   // Return Coins
@@ -52,11 +70,11 @@ export const IncomeProvider = ({ children }) => {
     setCoinsChange();
   };
 
-  // Popup Result purchase
+  // Modal Result purchase
 
   const handleClose = () => {
     handleReturnCoins();
-    setOpenPopup(false);
+    setOpenModal(false);
   };
 
   const value = {
@@ -70,7 +88,7 @@ export const IncomeProvider = ({ children }) => {
     coinsChange,
     handleClose,
     productBought,
-    openPopup,
+    openModal,
   };
   return (
     <IncomeContext.Provider value={value}>{children}</IncomeContext.Provider>
