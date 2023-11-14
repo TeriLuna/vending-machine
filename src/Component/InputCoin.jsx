@@ -3,10 +3,8 @@ import React from "react";
 import { Box, Button, Grid } from "@mui/material";
 import PaidIcon from "@mui/icons-material/Paid";
 
-import Change from "./Change";
-
 const InputCoin = (props) => {
-  const { moneyInserted, handleVendingAction } = props;
+  const { moneyInserted, handleReturnCoins, handleCoinCount } = props;
 
   const moneyAcceptance = [0.05, 0.1, 0.25, 1];
 
@@ -17,7 +15,7 @@ const InputCoin = (props) => {
           return (
             <Grid item key={i} maxWidth="xs" mb={2} mr>
               <Button
-                onClick={() => handleVendingAction("INSERT_COIN", money)}
+                onClick={() => handleCoinCount(money)}
                 variant="outlined"
                 size="large"
               >
@@ -35,11 +33,10 @@ const InputCoin = (props) => {
           disabled={!moneyInserted.length}
           startIcon={<PaidIcon />}
           sx={{ marginTop: "20px" }}
-          onClick={() => handleVendingAction("RETURN_COIN")}
+          onClick={() => handleReturnCoins()}
         >
           Return Coins
         </Button>
-        <Change valueCoin={moneyInserted} />
       </Box>
     </>
   );

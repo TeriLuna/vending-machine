@@ -3,22 +3,27 @@ import React, { createContext, useState } from "react";
 export const IncomeContext = createContext();
 
 export const IncomeProvider = ({ children }) => {
-  const [totalCountCoin, setTotalCountCoin] = useState(0);
+  const [sumCoinInserted, setSumCoinInserted] = useState(0);
   const [moneyInserted, setMoneyInserted] = useState([]);
+  const [coinsChange, setCoinsChange] = useState([]);
+  const [openPopup, setOpenPopup] = useState(false);
+  const [productBought, setProductBought] = useState({});
+
   const moneyAcceptance = [1, 0.25, 0.1, 0.05];
 
   // Handle coins inserted by user
   const handleCoinCount = (value) => {
     moneyInserted.push(value);
     let newTotalCoins = moneyInserted.reduce((a, b) => a + b, 0);
-    setTotalCountCoin(newTotalCoins);
+    setSumCoinInserted(newTotalCoins);
   };
 
   // Products Selection that receives the data of the product selected
   const onAddProduct = (value) => {
-    let change = totalCountCoin - value.price;
-
+    let change = sumCoinInserted - value.price;
     getChange(change);
+    setProductBought(value);
+    setOpenPopup(true);
   };
 
   // Get Change
@@ -37,40 +42,35 @@ export const IncomeProvider = ({ children }) => {
       }
     });
     res.shift();
-    return res;
+    setCoinsChange(res);
   };
 
   // Return Coins
   const handleReturnCoins = () => {
-    setTotalCountCoin(0);
+    setSumCoinInserted(0);
     setMoneyInserted([]);
+    setCoinsChange();
   };
 
-  // Handle Vending Machine Action
-  const handleVendingAction = (action, value) => {
-    switch (action) {
-      case "INSERT_COIN":
-        handleCoinCount(value);
-        break;
-      case "RETURN_COIN":
-        handleReturnCoins();
-        break;
-      case "SELECT_PRODUCT":
-        onAddProduct(value);
-        break;
-      default:
-        console.error("Invalid action");
-    }
+  // Popup Result purchase
+
+  const handleClose = () => {
+    handleReturnCoins();
+    setOpenPopup(false);
   };
 
   const value = {
-    totalCountCoin,
-    setTotalCountCoin,
+    sumCoinInserted,
+    setSumCoinInserted,
     handleCoinCount,
     onAddProduct,
     handleReturnCoins,
     moneyInserted,
-    handleVendingAction,
+    getChange,
+    coinsChange,
+    handleClose,
+    productBought,
+    openPopup,
   };
   return (
     <IncomeContext.Provider value={value}>{children}</IncomeContext.Provider>
