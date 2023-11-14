@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Box } from "@mui/material";
+import { IncomeContext } from "../Context/IncomeProvider";
 
 const Change = ({ valueCoin }) => {
   // Reduce decimal
   const roundedNum = valueCoin;
-  // const itemPrice = data.reduce(function (prev, current) {
-  //   return prev.price < current.price ? prev : current;
-  // });
+  // const { changeCoins } = useContext(IncomeContext);
+
+  // console.log({ changeCoins });
+
   let coins = [
     [0.05, 0.05],
     [0.1, 0.1, 0.1],
@@ -17,7 +19,7 @@ const Change = ({ valueCoin }) => {
 
   return (
     <Box display="flex" flexDirection="column" justifyContent="center">
-      <div>{roundedNum}</div>
+      {/* <div>{changeCoins}</div> */}
       {}
     </Box>
   );

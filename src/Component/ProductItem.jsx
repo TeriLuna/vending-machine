@@ -15,15 +15,15 @@ import { IncomeContext } from "../Context/IncomeProvider";
 const ProductItem = (productsData) => {
   const { id, name, price, qty } = productsData;
 
-  const { onAddProduct, totalCountCoin } = useContext(IncomeContext);
+  const { totalCountCoin, handleVendingAction } = useContext(IncomeContext);
 
   const [stockQty, setStockQty] = useState(qty);
 
-  const handleStockQty = () => {
+  const handleStockQty = (productsData) => {
     if (stockQty > 0) {
       setStockQty(stockQty - 1);
     }
-    onAddProduct(productsData);
+    handleVendingAction("SELECT_PRODUCT", productsData);
   };
 
   return (
@@ -68,8 +68,8 @@ const ProductItem = (productsData) => {
         <Button
           fullWidth
           variant="outlined"
-          disabled={stockQty === 0 || price > totalCountCoin}
-          onClick={handleStockQty}
+          disabled={stockQty === 0 || totalCountCoin < price}
+          onClick={() => handleStockQty(productsData)}
         >
           Get {name}
         </Button>

@@ -6,7 +6,7 @@ import { IncomeContext } from "../Context/IncomeProvider";
 import InputCoin from "./InputCoin";
 
 const InputCoinContainer = ({ data }) => {
-  const { handleCoinCount, totalCountCoin, handleReturnCoins, moneyInserted } =
+  const { totalCountCoin, moneyInserted, handleVendingAction } =
     useContext(IncomeContext);
   // Reduce decimal
   const roundedNum = totalCountCoin?.toFixed(2);
@@ -14,6 +14,7 @@ const InputCoinContainer = ({ data }) => {
     return prev.price < current.price ? prev : current;
   });
 
+  // console.log({ moneyInserted, totalCountCoin });
   return (
     <Grid item component="main" xs={12} md={6} lg={6}>
       <Typography
@@ -37,8 +38,7 @@ const InputCoinContainer = ({ data }) => {
       ) : null}
 
       <InputCoin
-        handleCoinCount={handleCoinCount}
-        handleReturnCoins={handleReturnCoins}
+        handleVendingAction={handleVendingAction}
         moneyInserted={moneyInserted}
       />
     </Grid>
