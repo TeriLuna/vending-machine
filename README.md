@@ -42,3 +42,21 @@ Now you can see the contents of the remote repository on your machine by moving 
 ## 🌐 Interact with the app
 
 You can interact with the app [Vending Machine App](https://teriluna.github.io/vending-machine/).
+
+
+## 🚀 About Me
+I'm a FrontEnd Developer with experience in React JS, HTML5, CSS3, JavaScript, and other front-end technologies.
+
+I have a passion for learning and am always seeking out new challenges to improve my skills.
+
+I am dedicated to producing high-quality work and delivering exceptional results. 
+
+
+### ©️ CopyRight
+
+This app was created and desined by Catherine Lozada, if you need to contact the creator please send an email to catherinelozada7@gmail.com
+
+
+[Github](https://github.com/TeriLuna)
+
+[LinkedIn](https://www.linkedin.com/in/catherine-lozada/)
